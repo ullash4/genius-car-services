@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
+import Services from "../Services/Services";
 
 const Home = () => {
-    return (
-        <div>
-            <h1>this is home component</h1>
-        </div>
-    );
+  return (
+    <div>
+        <Services></Services>
+    </div>
+  );
 };
 
 export default Home;
