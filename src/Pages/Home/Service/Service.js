@@ -13,7 +13,7 @@ const Service = ({service}) => {
             <div className='text-center p-4 shadow rounded-3'>
             <img className='img-fluid' src={img} alt="" />
             <h5>{name}</h5>
-            <button onClick={()=>navigateToServiceDetails(id)} type="button" class="btn btn-outline-dark">Book Now</button>
+            <button onClick={()=>navigateToServiceDetails(id)} type="button" className="btn btn-outline-dark">Book Now</button>
             </div>
         </div>
     );
