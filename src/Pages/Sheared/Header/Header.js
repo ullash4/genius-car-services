@@ -39,8 +39,8 @@ const Header = () => {
             </Nav>
             <Nav>
               <Nav.Link as={Link} to="/about">About</Nav.Link>
-              <Nav.Link as={Link} to="/">
-                Dank memes
+              <Nav.Link as={Link} to="/login">
+                LogIn
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
