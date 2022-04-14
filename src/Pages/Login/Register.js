@@ -1,16 +1,28 @@
 import React from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { Link, useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
 
 const Register = () => {
 
+    const navigate = useNavigate()
+
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+      ] = useCreateUserWithEmailAndPassword(auth);
+
     const handleRegister =(e)=>{
         e.preventDefault();
-        const firstName = e.target.firstName.value;
-        const lastName = e.target.lastName.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(email, password, firstName, lastName);
+        createUserWithEmailAndPassword(email, password)
+    }
+    if(user){
+        navigate('/')
     }
 
   return (
@@ -38,31 +50,6 @@ const Register = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control placeholder="Password" name='password' type='password' />
         </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formGridPassword">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control placeholder="Confirm Password" type='password' />
-        </Form.Group>
-
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridCity">
-            <Form.Label>City</Form.Label>
-            <Form.Control />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridState">
-            <Form.Label>State</Form.Label>
-            <Form.Select defaultValue="Choose...">
-              <option>Choose...</option>
-              <option>...</option>
-            </Form.Select>
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridZip">
-            <Form.Label>Zip</Form.Label>
-            <Form.Control />
-          </Form.Group>
-        </Row>
 
         <Form.Group className="mb-3" id="formGridCheckbox">
           <Form.Check type="checkbox" label="Accept All terms and conditions" />
