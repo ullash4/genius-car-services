@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import Sociallogin from "./Sociallogin/Sociallogin";
 
 const Login = () => {
 
@@ -53,9 +54,10 @@ const Login = () => {
         </Form.Group>
       <p>New to Genius Car ?  <Link to={'/register'} className='text-primary text-decoration-none'>Register Here</Link> </p>
         <Button variant="primary" type="submit">
-          Submit
+          Log In
         </Button>
       </Form>
+      <Sociallogin></Sociallogin>
     </>
   );
 };
