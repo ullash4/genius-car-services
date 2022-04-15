@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import Sociallogin from "./Sociallogin/Sociallogin";
 
 const Register = () => {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [agree, setAgree] = useState(false);
 
     const [
         createUserWithEmailAndPassword,
@@ -19,8 +21,13 @@ const Register = () => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        createUserWithEmailAndPassword(email, password)
-    }
+        const agree = e.target.terms.checked;
+
+        if(agree){
+          createUserWithEmailAndPassword(email, password)
+        }
+      }
+
     if(user){
         navigate('/')
     }
@@ -52,13 +59,15 @@ const Register = () => {
         </Form.Group>
 
         <Form.Group className="mb-3" id="formGridCheckbox">
-          <Form.Check type="checkbox" label="Accept All terms and conditions" />
+        
+          <Form.Check onClick={()=>setAgree(!agree)} className={`mx-2 ${agree ? 'text-primary' : 'text-danger'}`}  type="checkbox" name="terms" label="Accept All terms and conditions" />
         </Form.Group>
         <p>Already have an account ? <Link to={'/login'} className='text-primary text-decoration-none'>Log In</Link> </p>
-        <Button variant="primary" type="submit">
+        <Button disabled={!agree} variant="primary" type="submit">
           Register
         </Button>
       </Form>
+      <Sociallogin></Sociallogin>
     </>
   );
 };

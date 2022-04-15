@@ -1,6 +1,7 @@
+import { async } from "@firebase/util";
 import React, { useRef } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import Sociallogin from "./Sociallogin/Sociallogin";
@@ -13,6 +14,17 @@ const Login = () => {
         loading,
         error,
       ] = useSignInWithEmailAndPassword(auth);
+
+      const [sendPasswordResetEmail] = useSendPasswordResetEmail(
+        auth
+      );
+
+    let errorElement;
+    if(error){
+      errorElement= <div>
+        <p className="text-danger text-center fs-4">Error: {error.message}</p>
+        </div>
+    }
 
     const emailRef = useRef('');
     const passwordRef = useRef('')
@@ -33,10 +45,17 @@ const Login = () => {
         navigate(from, {replace: true})
     }
 
+    const handleResetPassword= async()=>{
+      const email = emailRef.current.value;
+      await sendPasswordResetEmail(email)
+      alert('Reset password sent to your Email ')
+    }
+
   return (
     <>
       <Form onSubmit={handleSubmitForm} className="container my-5 shadow-lg p-5 w-50 mx-auto">
           <h1 className="text-center my-3">Log In</h1>
+          {errorElement}
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control ref={emailRef} type="email" placeholder="Enter email" />
@@ -53,10 +72,13 @@ const Login = () => {
           <Form.Check type="checkbox" label="Check me out" />
         </Form.Group>
       <p>New to Genius Car ?  <Link to={'/register'} className='text-primary text-decoration-none'>Register Here</Link> </p>
+      <p>Forget Your password ? <button onClick={handleResetPassword} className="btn btn-primary p-1 rounded-pill bg-white text-primary border-0 mb-1">Reset Password</button> </p>
         <Button variant="primary" type="submit">
           Log In
         </Button>
+        
       </Form>
+
       <Sociallogin></Sociallogin>
     </>
   );
