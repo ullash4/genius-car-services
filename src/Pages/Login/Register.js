@@ -2,8 +2,10 @@ import { async } from "@firebase/util";
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
+
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import PageTitle from "../Sheared/PageTitle/PageTitle";
 import Sociallogin from "./Sociallogin/Sociallogin";
 
 const Register = () => {
@@ -43,6 +45,7 @@ const Register = () => {
 
   return (
     <>
+    <PageTitle title='Register'></PageTitle>
       <Form onSubmit={handleRegister} className='container my-5 p-5 shadow-lg rounded-3 w-50 mx-auto'>
           <h1 className="text-center mb-5">Register</h1>
         <Row className="mb-3">

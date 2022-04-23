@@ -7,6 +7,7 @@ import auth from "../../firebase.init";
 import Sociallogin from "./Sociallogin/Sociallogin";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PageTitle from "../Sheared/PageTitle/PageTitle";
 
 const Login = () => {
 
@@ -59,6 +60,7 @@ const Login = () => {
 
   return (
     <>
+    <PageTitle title='login'></PageTitle>
       <Form onSubmit={handleSubmitForm} className="container my-5 shadow-lg p-5 w-50 mx-auto">
           <h1 className="text-center my-3">Log In</h1>
           {errorElement}
