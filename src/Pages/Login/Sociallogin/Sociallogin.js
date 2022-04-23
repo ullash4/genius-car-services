@@ -5,9 +5,11 @@ import { SiFacebook } from 'react-icons/si';
 import { BsGithub } from 'react-icons/bs';
 import { useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Sociallogin = () => {
+
+    const location = useLocation()
 
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
     const [signInWithGithub, user1, loading1, error1] = useSignInWithGithub(auth);
@@ -28,8 +30,12 @@ const Sociallogin = () => {
       if (loading || loading1) {
         return <p className='text-primary text-center fs-3'>Loading...</p>;
       }
+
+      
+
+    let from = location.state?.from?.pathname || '/';
       if (user || user1) {
-        navigate('/')
+        navigate(from, {replace: true})
       }
 
     return (
