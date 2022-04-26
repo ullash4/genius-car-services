@@ -5,7 +5,7 @@ import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from "react-
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import Sociallogin from "./Sociallogin/Sociallogin";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PageTitle from "../Sheared/PageTitle/PageTitle";
 
@@ -86,7 +86,7 @@ const Login = () => {
         </Button>
         
       </Form>
-      <ToastContainer />
+      
       <Sociallogin></Sociallogin>
     </>
   );
